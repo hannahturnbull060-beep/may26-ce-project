@@ -32,7 +32,7 @@ CACHE_TABLE_NAME = os.environ["CACHE_TABLE_NAME"]
 # Simple TTL for now.
 # Keep this boring until the proxy is stable.
 CACHE_TTL_SECONDS = int(
-    os.environ.get("CACHE_TTL_SECONDS", "60")
+    os.environ.get("CACHE_TTL_SECONDS", "300")
 )
 
 # Disabled by default.
