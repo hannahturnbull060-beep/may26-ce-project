@@ -49,7 +49,7 @@ UPSTREAM_TIMEOUT_SECONDS = 25
 
 RETRY_DELAY_SECONDS = 0.2
 
-SHARED_ENDPOINTS = {"/hospitals", "/staffs"}
+SHARED_ENDPOINTS = {"/hospitals", "/staffs", "/patients", "/notes"}
 
 
 # Create DynamoDB resource outside handler so warm Lambda invocations
