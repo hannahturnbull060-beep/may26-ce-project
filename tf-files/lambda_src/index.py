@@ -49,6 +49,8 @@ UPSTREAM_TIMEOUT_SECONDS = 25
 
 RETRY_DELAY_SECONDS = 0.2
 
+SHARED_ENDPOINTS = {"/hospitals", "/staffs"}
+
 
 # Create DynamoDB resource outside handler so warm Lambda invocations
 # can reuse the connection.
@@ -225,11 +227,18 @@ def build_cache_key(authorization, path, query_params):
     if query_string:
         resource = f"{normalized_path}?{query_string}"
 
-    cache_key = f"{caller_hash}:{resource}"
-
     # Used by ResourceIndex so all variants of the same collection
     # can be invalidated together.
     resource_group = get_resource_group(normalized_path)
+
+    # Check if the request is a non-secure endpoint like hospitals or staffs,
+    # then strip 'caller hash' if it is - this is only needed for sensitive endpoints
+    # like patients and notes. Should improve caching functionality.
+    if resource_group in SHARED_ENDPOINTS:
+        cache_key = f"global:{resource}"
+
+    else:
+        cache_key = f"{caller_hash}:{resource}"
 
     return cache_key, resource_group
 

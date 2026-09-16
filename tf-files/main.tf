@@ -238,7 +238,9 @@ resource "aws_lambda_function" "proxy_shield" {
   role             = aws_iam_role.lambda_exec.arn
   handler          = "index.lambda_handler"
   runtime          = "python3.12"
-  timeout          = 25 # Accommodates slow HOSP calls + retries
+  timeout          = 55
+  memory_size      = 512
+  # Accommodates slow HOSP calls + retries
 
   # Protect Puma from thread exhaustion by capping concurrency
   reserved_concurrent_executions = 8
