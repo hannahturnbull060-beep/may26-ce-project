@@ -255,7 +255,7 @@ resource "aws_lambda_function" "proxy_shield" {
     variables = {
       CACHE_TABLE_NAME    = aws_dynamodb_table.cache.name
       HOSP_BACKEND_URL    = "http://172.31.39.164"
-      CACHE_TTL_SECONDS   = "300" # Enforced as string
+      CACHE_TTL_SECONDS   = "900" # Enforced as string
       RETRY_WRITES_ON_5XX = "true"
     }
   }
