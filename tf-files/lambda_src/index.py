@@ -45,7 +45,7 @@ RETRY_WRITES_ON_5XX = (
 MAX_ATTEMPTS = 2
 
 # HOSP has already been observed taking several seconds.
-UPSTREAM_TIMEOUT_SECONDS = 12
+UPSTREAM_TIMEOUT_SECONDS = 25
 
 RETRY_DELAY_SECONDS = 0.2
 
